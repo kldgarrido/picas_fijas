@@ -52,14 +52,14 @@ function validate(number){
   number_temp = '';
   main_number_temp = '';
 
-  calcular_fijas(number);
-  calcular_picas(number);
+  calculate_fijas(number);
+  calculate_picas(number);
 
   var result = { "numero": number, "picas": picas, "fijas": fijas };
   return result;
 }
 
-function calcular_fijas(number){
+function calculate_fijas(number){
   for (i = 0; i < 4; i++) { 
     if (number[i] == main_number[i]){
         fijas++;
@@ -71,7 +71,7 @@ function calcular_fijas(number){
   }
 }
 
-function calcular_picas(number){
+function calculate_picas(number){
   for (i = 0; i < number_temp.length; i++) {
     if (main_number_temp.indexOf(number_temp[i]) >= 0){
         picas++;
@@ -103,19 +103,33 @@ function validate_number(number) {
     return false;
   }
 
+  if (validate_expresion(number) ==false) {
+    return false;
+  }
+
+  if (validate_repeted_number(number) ==false) {
+    return false;
+  }
+
+  return true;
+}
+
+function validate_repeted_number(number){
   for(i=0; i<4; i++){
     var temp_number = number.substring(0,i) + number.substring(i+1, number.length);
     if (temp_number.indexOf(number[i]) >= 0){
       return false;
     }
+  }
+  return true;
+}
 
+function validate_expresion(number){
+  for(i=0; i<4; i++){
+    var temp_number = number.substring(0,i) + number.substring(i+1, number.length);
+    if (temp_number.indexOf(number[i]) >= 0){
+      return false;
+    }
   }
-
-  var test = number.match(/[0-9]{4}$/g);
-  if (test==null){
-    return false;
-  }
-  else {
-    return true;
-  }
+  return true;
 }
