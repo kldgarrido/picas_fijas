@@ -125,11 +125,9 @@ function validate_repeted_number(number){
 }
 
 function validate_expresion(number){
-  for(i=0; i<4; i++){
-    var temp_number = number.substring(0,i) + number.substring(i+1, number.length);
-    if (temp_number.indexOf(number[i]) >= 0){
-      return false;
-    }
+  var test = number.match(/[0-9]{4}/g);
+  if (test==null){
+    return false;
   }
   return true;
 }
